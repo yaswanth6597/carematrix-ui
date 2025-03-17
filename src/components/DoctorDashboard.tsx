@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./DoctorDashboard.css";
+import { users } from "../data/user"; 
+import { ProfileModal } from "./ProfileModal";
+import { Search, UserCircle2, LogOut, Plus } from 'lucide-react';
+
+const doctor = users.find((u) => u.role === "doctor");
 const DoctorDashboard = () => {
   const [showProfile, setShowProfile] = useState(false);
   const navigate = useNavigate();
@@ -58,14 +63,13 @@ const DoctorDashboard = () => {
 
   return (
     <div className="dashboard-container">
-      <div className="top-bar">
+      <div className="doctor-top-bar">
         <h2>Dr. John Smith</h2>
         <div className="icons">
-          {/* Profile Icon */}
-          <span className="icon" onClick={() => setShowProfile(!showProfile)}>👤</span>
-
-          {/* Logout Icon */}
-          <span className="icon" onClick={() => navigate("/")}>🔄</span>
+        <UserCircle2 className="icon" onClick={() => setShowProfile(!showProfile)} />
+        {/* ✅ Profile Modal */}
+        {showProfile && doctor && <ProfileModal user={doctor} onClose={() => setShowProfile(false)} />}
+        <LogOut className="icon" onClick={() => navigate("/")}/>
         </div>
       </div>
 
@@ -81,7 +85,7 @@ const DoctorDashboard = () => {
             onChange={(e) => setSearchId(e.target.value)}
           />
           <button className="search-button" onClick={handleSearch}>
-            🔍 Search Patient
+            <Search className="search-icon"/>Search Patient
           </button>
         </div>
       </div>
@@ -107,7 +111,7 @@ const DoctorDashboard = () => {
             <div className="card">
             <div className="card-header">
             <h4>Allergies</h4>
-            <span className="add-icon">+</span>
+            <Plus className="add-icon"/>
             </div>
               {searchResult.allergies.map((allergy, index) => (
                 <p key={index} className="allergy-item">
@@ -119,7 +123,7 @@ const DoctorDashboard = () => {
             <div className="card">
             <div className="card-header">
                 <h4>Current Conditions</h4>
-                <span className="add-icon">+</span>
+                <Plus className="add-icon"/>
             </div>
               {searchResult.conditions.map((cond, index) => (
                 <p key={index} className="condition-item">
@@ -134,7 +138,7 @@ const DoctorDashboard = () => {
             <div className="card">
               <div className="card-header">
               <h4>Current Prescriptions</h4>
-              <span className="add-icon">+</span>
+              <Plus className="add-icon"/>
               </div>
               {searchResult.prescriptions.map((pres, index) => (
                 <p key={index} className="prescription-item">
@@ -165,7 +169,7 @@ const DoctorDashboard = () => {
             <div className="card">
             <div className="card-header">
                 <h4>Surgical History</h4>
-                <span className="add-icon">+</span>
+                <Plus className="add-icon"/>
                 </div>
               {searchResult.surgeries.map((surgery, index) => (
                 <p key={index} className="surgery-item">

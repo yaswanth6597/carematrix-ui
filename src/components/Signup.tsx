@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { Stethoscope } from 'lucide-react';
 import "./Signup.css";
 
 const Signup = () => {
@@ -8,7 +9,9 @@ const Signup = () => {
   return (
     <div className="signup-container">
       <div className="signup-header">
-        <div className="icon">🔵</div>
+      <div className="flex justify-center">
+          <Stethoscope className="stethscope"/>
+        </div>
         <h2>Create a new account</h2>
       </div>
       <form>
@@ -61,8 +64,13 @@ const Signup = () => {
             <select>
               <option>Select Blood Group</option>
               <option>A+</option>
+              <option>A-</option>
               <option>B+</option>
+              <option>A-</option>
               <option>O+</option>
+              <option>A-</option>
+              <option>AB+</option>
+              <option>AB-</option>
             </select>
           </div>
         </div>

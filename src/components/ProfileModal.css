@@ -1,0 +1,164 @@
+/* ✅ Modal Overlay */
+.profile-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 1000;
+    max-height: 90vh; /* Prevents it from overflowing off-screen */
+    overflow-y: auto; /* Enables scrolling if content is too long */
+  }
+  
+  /* ✅ Modal Container */
+  .profile-modal {
+    background: white;
+    border-radius: 10px;
+    width: 600px;
+    max-width: 90%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  
+/* ✅ Ensure the Modal is Centered Properly */
+.profile-modal-overlay .profile-modal {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none; /* Removes any unintentional positioning */
+  }
+
+  /* ✅ Modal Header */
+  .profile-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+  }
+  
+  /* ✅ Icons in Header */
+  .modal-header-icons {
+    display: flex;
+    gap: 10px;
+  }
+  
+  /* ✅ Close & Edit Button */
+/* ✅ Ensure the buttons have no border or background */
+.close-button,
+.edit-button {
+    all: unset; /* Reset inherited styles */
+    color: #9ca3af; /* Light gray */
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+    transition: color 0.2s ease-in-out;
+}
+
+/* ✅ Remove hover background to keep them clean */
+.close-button:hover,
+.edit-button:hover {
+    color: #6b7280; /* Slightly darker gray */
+    background: none; /* Remove any background color */
+}
+
+/* ✅ Prevent unwanted outlines when clicking */
+.close-button:focus,
+.edit-button:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+/* ✅ Make sure they are positioned correctly */
+.modal-header-icons {
+    display: flex;
+    gap: 10px;
+}
+
+
+  
+  /* ✅ Grid Layout */
+  .profile-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+  
+  /* ✅ Profile Fields */
+  .profile-field {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .profile-label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #6b7280; /* Gray text */
+  }
+  
+  .profile-text {
+    font-size: 16px;
+    color: black;
+  }
+  
+  /* ✅ Input Fields when Editing */
+  .profile-input {
+    width: 90%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+  
+  /* ✅ Modal Footer */
+  .profile-modal-footer {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 15px;
+    border-top: 1px solid #ddd;
+    margin-top: 10px;
+  }
+  
+  /* ✅ Save & Cancel Buttons */
+  .profile-save-btn {
+    background: #2563eb;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  .profile-cancel-btn {
+    background: #f3f4f6;
+    color: #374151;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  .profile-save-btn:hover {
+    background: #1e40af;
+  }
+  
+  .profile-cancel-btn:hover {
+    background: #e5e7eb;
+  }
+  

@@ -1,58 +1,104 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./PatientDashboard.css";
+import { users } from "../data/user"; 
+import { ProfileModal } from "./ProfileModal";
+import { UserCircle2, LogOut } from 'lucide-react';
+
+const patient = users.find((u) => u.role === "patient");
 
 const PatientDashboard = () => {
   const [showProfile, setShowProfile] = useState(false);
   const navigate = useNavigate();
 
+  if (!patient) {
+    return <div className="text-center text-red-600">Error: Patient not found</div>;
+  }
+
   return (
     <div className="dashboard-container">
+      
+      {/* ✅ Top Navigation Bar */}
       <div className="top-bar">
-        <h1>Welcome, Jane Doe</h1>
+        <h1>Welcome, {patient.name}</h1>
         <div className="icons">
-          <span className="icon" onClick={() => setShowProfile(!showProfile)}>👤</span>
-          <span className="icon" onClick={() => navigate("/")}>🔄</span>
+          <UserCircle2 className="icon" onClick={() => setShowProfile(!showProfile)} />
+          {/* ✅ Profile Modal */}
+          {showProfile && <ProfileModal user={patient} onClose={() => setShowProfile(false)} />}
+          <LogOut className="icon" onClick={() => navigate("/")}/>
         </div>
       </div>
-      {showProfile && (
-        <div className="profile-modal">
-          <h2>Profile Details</h2>
-          <p><strong>Name:</strong> Jane Doe</p>
-          <p><strong>Email:</strong> patient@example.com</p>
-          <button onClick={() => setShowProfile(false)}>Close</button>
-        </div>
-      )}
-      <div className="grid-layout">
+
+
+      {/* ✅ Patient Medical Information */}
+      <div className="patient-grid-layout">
+        
+        {/* Allergies */}
         <div className="card wide-card">
           <h2>Allergies</h2>
           <div className="allergy-list">
-            <p className="allergy-item">Penicillin</p>
-            <p className="allergy-item">Peanuts</p>
-            <p className="allergy-item">Latex</p>
+            {patient.allergies?.length ? (
+              patient.allergies.map((allergy, index) => (
+                <p key={index} className="allergy-item">{allergy}</p>
+              ))
+            ) : (
+              <p className="text-gray-600">No known allergies</p>
+            )}
           </div>
         </div>
+
+        {/* Current Conditions */}
         <div className="card wide-card">
           <h2>Current Conditions</h2>
           <div className="condition-list">
-            <p className="condition-item">Asthma<br/> Diagnosed: 2015-05-10 <br/> Status: Controlled</p>
-            <p className="condition-item">Seasonal Allergies<br/> Diagnosed: 2018-03-22 <br/> Status: Ongoing</p>
+            {patient.diseases?.length ? (
+              patient.diseases.map((disease, index) => (
+                <p key={index} className="condition-item">
+                  <strong>{disease.name}</strong><br/>
+                  Diagnosed: {disease.diagnosedDate} <br/>
+                  Status: {disease.status}
+                </p>
+              ))
+            ) : (
+              <p className="text-gray-600">No existing conditions</p>
+            )}
           </div>
         </div>
+
+        {/* Insurance Information */}
         <div className="card wide-card">
           <h2>Insurance Information</h2>
           <div className="insurance-info">
-            <p>HealthGuard Insurance</p>
-            <p>Policy Number: HG123456789</p>
-            <p>Expiry Date: 2024-12-31</p>
-            <p>Coverage: Comprehensive</p>
+            {patient.insurance ? (
+              <>
+                <p>{patient.insurance.provider}</p>
+                <p>Policy Number: {patient.insurance.policyNumber}</p>
+                <p>Expiry Date: {patient.insurance.expiryDate}</p>
+                <p>Coverage: {patient.insurance.coverage}</p>
+              </>
+            ) : (
+              <p className="text-gray-600">No insurance details available</p>
+            )}
           </div>
         </div>
+
+        {/* Current Prescriptions */}
         <div className="card wide-card">
           <h2>Current Prescriptions</h2>
           <div className="prescription-list">
-            <p className="prescription-item">Amoxicillin<br/> Dosage: 500mg <br/> Frequency: Twice daily <br/> Prescribed: 2023-12-01 <br/> Doctor: Dr. Sarah Johnson</p>
-            <p className="prescription-item">Loratadine<br/> Dosage: 10mg <br/> Frequency: Once daily</p>
+            {patient.prescriptions?.length ? (
+              patient.prescriptions.map((prescription, index) => (
+                <p key={index} className="prescription-item">
+                  <strong>{prescription.medication}</strong><br/>
+                  Dosage: {prescription.dosage} <br/>
+                  Frequency: {prescription.frequency} <br/>
+                  Prescribed: {prescription.prescribedDate} <br/>
+                  Doctor: {prescription.doctor}
+                </p>
+              ))
+            ) : (
+              <p className="text-gray-600">No active prescriptions</p>
+            )}
           </div>
         </div>
       </div>

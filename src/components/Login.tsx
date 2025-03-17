@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Stethoscope } from 'lucide-react';
 import "./Login.css";
 
 const Login = () => {
@@ -22,12 +23,17 @@ const Login = () => {
   };
 
   return (
+    <div>
     <div className="login-container">
       <div className="login-header">
-        <div className="icon">🔵</div>
+        <div className="flex justify-center">
+          <Stethoscope className="stethscope"/>
+        </div>
         <h2>Sign in to your account</h2>
       </div>
-      <form onSubmit={handleSubmit}>
+    </div>
+    <div className="login-form">
+      <form  onSubmit={handleSubmit}>
         <div className="input-group">
           <label>Email</label>
           <input 
@@ -53,7 +59,8 @@ const Login = () => {
           onClick={() => navigate("/signup")}
           style={{ color: "blue", cursor: "pointer" }} >Don't have an account? Sign up</span></p>
       </div>
-    </div>
+    </div>  
+      </div>
   );
 };
 

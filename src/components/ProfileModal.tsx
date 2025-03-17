@@ -64,7 +64,7 @@ export function ProfileModal({ user, onClose }: ProfileModalProps) {
       <div className="profile-modal" onClick={(e) => e.stopPropagation()}>
         {/* ✅ Modal Header */}
         <div className="profile-modal-header">
-          <h2>Patient Profile</h2>
+        <h2>{user.role === 'doctor' ? 'Doctor Profile' : 'Patient Profile'}</h2>
           <div className="modal-header-icons">
             {!isEditing && (
               <button className="edit-button" onClick={() => setIsEditing(true)}>

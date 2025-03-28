@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./PatientDashboard.css";
 import { users } from "../data/user"; 
+import AppointmentScheduler from "./AppointmentScheduler";
 import { ProfileModal } from "./ProfileModal";
 import { UserCircle2, LogOut } from 'lucide-react';
 
@@ -9,6 +10,7 @@ const patient = users.find((u) => u.role === "patient");
 
 const PatientDashboard = () => {
   const [showProfile, setShowProfile] = useState(false);
+  const [showAppointmentScheduler, setShowAppointmentScheduler] = useState(false);
   const navigate = useNavigate();
 
   if (!patient) {
@@ -21,6 +23,10 @@ const PatientDashboard = () => {
       {/* ✅ Top Navigation Bar */}
       <div className="top-bar">
         <h1>Welcome, {patient.name}</h1>
+        <button onClick={() => setShowAppointmentScheduler(true)} className="schedule-btn">
+          Schedule Appointment
+        </button>
+        {showAppointmentScheduler && <AppointmentScheduler onClose={() => setShowAppointmentScheduler(false)} />}
         <div className="icons">
           <UserCircle2 className="icon" onClick={() => setShowProfile(!showProfile)} />
           {/* ✅ Profile Modal */}

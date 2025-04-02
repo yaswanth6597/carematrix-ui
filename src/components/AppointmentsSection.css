@@ -1,0 +1,68 @@
+.appointments-section {
+    padding: 2rem;
+  }
+  
+  .appointments-container {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  
+  .appointment-box {
+    flex: 1;
+    min-width: 300px;
+    background-color: #f9fafb;
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+  }
+  
+  .section-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+  
+  .no-appointments {
+    color: #6b7280;
+    font-size: 1rem;
+  }
+  
+  .appointment-card {
+    background-color: #ffffff;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    position: relative;
+  }
+  
+  .patient-name {
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .icon {
+    margin-right: 0.3rem;
+  }
+  
+  .badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 0.8rem;
+    padding: 0.3rem 0.6rem;
+    border-radius: 0.4rem;
+    font-weight: 600;
+  }
+  
+  .badge.telemedicine {
+    background-color: #d1fae5;
+    color: #065f46;
+  }
+  
+  .badge.in-person {
+    background-color: #e0e7ff;
+    color: #1e40af;
+  }
+  

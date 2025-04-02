@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./PatientDashboard.css";
 import { users } from "../data/user"; 
 import AppointmentScheduler from "./AppointmentScheduler";
+import AppointmentsSection from "./AppointmentsSection";
 import TelemedicineModal from "./TelemedicineModal";
 import { ProfileModal } from "./ProfileModal";
 import { UserCircle2, LogOut, Calendar, Video } from 'lucide-react';
@@ -40,7 +41,7 @@ const PatientDashboard = () => {
           <LogOut className="icon" onClick={() => navigate("/")}/>
         </div>
       </div>
-
+      <AppointmentsSection />
 
       {/* ✅ Patient Medical Information */}
       <div className="patient-grid-layout">

@@ -3,14 +3,16 @@ import { useNavigate } from "react-router-dom";
 import "./PatientDashboard.css";
 import { users } from "../data/user"; 
 import AppointmentScheduler from "./AppointmentScheduler";
+import TelemedicineModal from "./TelemedicineModal";
 import { ProfileModal } from "./ProfileModal";
-import { UserCircle2, LogOut } from 'lucide-react';
+import { UserCircle2, LogOut, Calendar, Video } from 'lucide-react';
 
 const patient = users.find((u) => u.role === "patient");
 
 const PatientDashboard = () => {
   const [showProfile, setShowProfile] = useState(false);
   const [showAppointmentScheduler, setShowAppointmentScheduler] = useState(false);
+  const [showTelemedicineModal, setShowTelemedicineModal] = useState(false);
   const navigate = useNavigate();
 
   if (!patient) {
@@ -23,8 +25,12 @@ const PatientDashboard = () => {
       {/* ✅ Top Navigation Bar */}
       <div className="top-bar">
         <h1>Welcome, {patient.name}</h1>
-        <button onClick={() => setShowAppointmentScheduler(true)} className="schedule-btn">
-          Schedule Appointment
+        <button onClick={() => setShowTelemedicineModal(true)} className="telemedicine-btn">
+          <Video />Telemedicine Consultation
+        </button>
+        {showTelemedicineModal && <TelemedicineModal onClose={() => setShowTelemedicineModal(false)} />}
+        <button onClick={() => setShowAppointmentScheduler(true)} className="appointment-btn">
+          <Calendar />Schedule Appointment
         </button>
         {showAppointmentScheduler && <AppointmentScheduler onClose={() => setShowAppointmentScheduler(false)} />}
         <div className="icons">

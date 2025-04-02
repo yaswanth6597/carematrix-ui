@@ -2,12 +2,16 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./DoctorDashboard.css";
 import { users } from "../data/user"; 
+import AppointmentScheduler from "./AppointmentScheduler";
+import TelemedicineModal from "./TelemedicineModal";
 import { ProfileModal } from "./ProfileModal";
-import { Search, UserCircle2, LogOut, Plus } from 'lucide-react';
+import { Search, UserCircle2, LogOut, Plus, Video, Calendar } from 'lucide-react';
 
 const doctor = users.find((u) => u.role === "doctor");
 const DoctorDashboard = () => {
   const [showProfile, setShowProfile] = useState(false);
+  const [showAppointmentScheduler, setShowAppointmentScheduler] = useState(false);
+  const [showTelemedicineModal, setShowTelemedicineModal] = useState(false);
   const navigate = useNavigate();
 
   const [searchResult, setSearchResult] = useState<
@@ -65,6 +69,15 @@ const DoctorDashboard = () => {
     <div className="dashboard-container">
       <div className="doctor-top-bar">
         <h2>Dr. John Smith</h2>
+        <button onClick={() => setShowTelemedicineModal(true)} className="telemedicine-btn">
+          <Video />Telemedicine Consultation
+        </button>
+        {showTelemedicineModal && <TelemedicineModal onClose={() => setShowTelemedicineModal(false)} />}
+        <button onClick={() => setShowAppointmentScheduler(true)} className="appointment-btn">
+          <Calendar />Schedule Appointment
+        </button>
+        {showAppointmentScheduler && <AppointmentScheduler onClose={() => setShowAppointmentScheduler(false)} />}
+        <div className="icons"></div>
         <div className="icons">
         <UserCircle2 className="icon" onClick={() => setShowProfile(!showProfile)} />
         {/* ✅ Profile Modal */}

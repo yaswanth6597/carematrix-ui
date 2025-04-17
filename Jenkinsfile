@@ -5,10 +5,6 @@ pipeline {
         SONAR_TOKEN = credentials('sonar-token-id')
     }
 
-    tools {
-        nodejs 'nodejs-18' // Make sure you configured this in Jenkins
-    }
-
     stages {
         stage('Checkout') {
             steps {
@@ -28,7 +24,7 @@ pipeline {
                     sh "npx sonar-scanner \
                         -Dsonar.projectKey=carematrix-ui \
                         -Dsonar.sources=. \
-                        -Dsonar.host.url=http://<your-sonarqube-ip>:9000 \
+                        -Dsonar.host.url=http://18.225.95.101:9000/ \
                         -Dsonar.login=$SONAR_TOKEN"
                 }
             }

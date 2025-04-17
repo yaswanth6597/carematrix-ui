@@ -1,13 +1,12 @@
 pipeline {
     agent any
 
-    tools {
-        maven 'maven3.8.5'
-        jdk 'jdk-17'
-    }
-
     environment {
         SONAR_TOKEN = credentials('sonar-token-id')
+    }
+
+    tools {
+        nodejs 'nodejs-18' // Make sure you configured this in Jenkins
     }
 
     stages {
@@ -17,17 +16,27 @@ pipeline {
             }
         }
 
-        stage('Build') {
+        stage('Install Dependencies') {
             steps {
-                sh 'mvn clean package -DskipTests'
+                sh 'npm install'
             }
         }
 
         stage('Code Quality - SonarQube') {
             steps {
                 withSonarQubeEnv('SonarQube') {
-                    sh 'mvn sonar:sonar -Dsonar.login=$SONAR_TOKEN'
+                    sh "npx sonar-scanner \
+                        -Dsonar.projectKey=carematrix-ui \
+                        -Dsonar.sources=. \
+                        -Dsonar.host.url=http://<your-sonarqube-ip>:9000 \
+                        -Dsonar.login=$SONAR_TOKEN"
                 }
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'npm run build'
             }
         }
 

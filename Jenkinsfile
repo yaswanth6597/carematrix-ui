@@ -24,7 +24,7 @@ pipeline {
                     sh "npx sonar-scanner \
                         -Dsonar.projectKey=carematrix-ui \
                         -Dsonar.sources=. \
-                        -Dsonar.host.url=http://18.225.95.101:9000/ \
+                        -Dsonar.host.url=http://18.118.190.217:9000// \
                         -Dsonar.login=$SONAR_TOKEN"
                 }
             }
